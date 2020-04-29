@@ -1,0 +1,29 @@
+.navbar-container {
+    margin: 20px 0px;
+    width: 100%;
+}
+
+ul {
+    margin: 0 auto;
+    padding: 10px;
+    list-style: none;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: gray;
+    opacity: .5;
+}
+
+ul li {
+    float: right;
+    margin: 10px 20px;  
+    color: white;
+}
+
+li:hover {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
