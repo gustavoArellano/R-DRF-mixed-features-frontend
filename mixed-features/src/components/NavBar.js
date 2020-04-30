@@ -14,18 +14,19 @@ class NavBar extends Component {
             <ul>
                 <li onClick={ () => this.props.showThis('login') }>Login</li>
                 <li onClick={ () => this.props.showThis('signup') }>Signup</li>
+                <li onClick={ () => this.props.showThis('') }>:]</li>
             </ul>
         )
 
         const logged_in_nav = (
             <ul>
-                <li>Logout</li>
+                <li onClick={ this.props.handle_logout }>Logout</li>
             </ul>
         )
 
         return(
             <div className="navbar-container">
-
+                
                 {this.props.logged_in ? logged_in_nav : logged_out_nav}
 
             </div>

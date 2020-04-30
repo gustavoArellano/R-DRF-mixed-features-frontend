@@ -1,0 +1,12 @@
+form label, form input {
+    display: block;
+    margin: 5px auto;
+}
+
+form label {
+    margin-top: 50px;
+}
+
+.button {
+    margin-top: 25px;
+}
