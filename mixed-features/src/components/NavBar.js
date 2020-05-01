@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../static/NavBar.css';
 import PropTypes from 'prop-types'
 
@@ -12,9 +13,17 @@ class NavBar extends Component {
     render() {
         const logged_out_nav = (
             <ul>
-                <li onClick={ () => this.props.showThis('login') }>Login</li>
-                <li onClick={ () => this.props.showThis('signup') }>Signup</li>
-                <li onClick={ () => this.props.showThis('') }>:]</li>
+                <li>
+                    <Link className="link" to="/login">Login</Link>
+                </li>
+
+                <li>
+                    <Link className="link" to="/signup">Signup</Link>
+                </li>
+
+                <li>
+                    <Link className="link" to="/">:]</Link>
+                </li>
             </ul>
         )
 

@@ -14,13 +14,14 @@ ul {
     opacity: .5;
 }
 
-ul li {
+ul li .link {
     float: right;
     margin: 10px 20px;  
     color: white;
+    text-decoration: none;
 }
 
-li:hover {
+.link:hover {
     color: black;
     text-decoration: underline;
     cursor: pointer;
