@@ -11,10 +11,76 @@ import Signup from './components/Signup';
 class App extends Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {
+      displayed: '',
+      logged_in: localStorage.getItem('token') ? true : false,
+    }
   }
 
+  handle_signup = (e, data) => {
+    e.preventDefault();
+    fetch('http://localhost:8000/api/user-signup/', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json())
+        .then(json => {
+        localStorage.setItem('token', json.token);
+        this.setState({
+            logged_in: true,
+            displayed: '',
+            username: json.username
+        })
+        window.location = '/home'
+    })
+  }
+
+  // handle_login = (e, data) => {
+  //   e.preventDefault();
+  //   fetch('http://localhost:8000/token-auth/', {
+  //       method: 'POST',
+  //       headers: {
+  //       'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(data)
+  //   })
+  //       .then(res => res.json())
+  //       .then(json => {
+  //       localStorage.setItem('token', json.token);
+  //       this.setState({
+  //           logged_in: true,
+  //           displayed: '',
+  //           username: json.user.username
+  //       })
+  //       window.location = '/home'
+  //   })
+  // }
+
+
+  displayThis = show => {
+      this.setState({
+          displayed: show
+      });
+  };
+
   render() {
+    let show;
+      switch (this.state.displayed) {
+
+        case 'login':
+            show = <Login />
+            break;
+
+        case 'signup':
+            show = <Signup handle_signup={this.handle_signup} />
+            break;
+
+        default: 
+
+    }
     return(
       <Router>
 
@@ -23,7 +89,6 @@ class App extends Component {
           <NavBar 
             logged_in = {this.state.logged_in}
             showThis = {this.displayThis}
-            handle_logout = {this.handle_logout}
           />
           <br />
 
@@ -34,6 +99,8 @@ class App extends Component {
           <Route path="/signup" component = {Signup} />     
 
           <Route path="/home" component = {Home} />
+
+          {show}
 
         </div>
 

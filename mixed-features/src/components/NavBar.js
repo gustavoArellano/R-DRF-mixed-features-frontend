@@ -9,6 +9,12 @@ class NavBar extends Component {
         this.state = {}
     }
 
+    handle_logout = () => {
+        localStorage.removeItem('token');
+        this.setState({ logged_in: false, display: ''})
+        window.lo = '/'
+      }
+
 
     render() {
         const logged_out_nav = (
@@ -24,12 +30,13 @@ class NavBar extends Component {
                 <li>
                     <Link className="link" to="/">:]</Link>
                 </li>
+
             </ul>
         )
 
         const logged_in_nav = (
             <ul>
-                <li onClick={ this.props.handle_logout }>Logout</li>
+                <li onClick={ this.handle_logout }>Logout</li>
             </ul>
         )
 
@@ -47,6 +54,6 @@ export default NavBar
 
 NavBar.propTypes = {
     logged_in: PropTypes.bool.isRequired,
-    showThis: PropTypes.func.isRequired,
-    handle_logout: PropTypes.func.isRequired
+    // handle_logout: PropTypes.func.isRequired
 }
+

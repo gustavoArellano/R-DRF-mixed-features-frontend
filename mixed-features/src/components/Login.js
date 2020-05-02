@@ -3,10 +3,13 @@ import PropTypes from 'prop-types'
 import '../static/Login.css'
 
 class Login extends Component {
-    state = {
-        username: '',
-        password: ''
-    };
+    constructor(props) {
+        super(props)
+        this.state = {
+            username: '',
+            password: ''
+        };
+    }
 
     handle_change = e => {
         const name = e.target.name;
@@ -18,11 +21,32 @@ class Login extends Component {
         })
     }
 
+    handle_login = (e, data) => {
+        e.preventDefault();
+        fetch('http://localhost:8000/token-auth/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(json => {
+            localStorage.setItem('token', json.token);
+            this.setState({
+                logged_in: true,
+                displayed: '',
+                username: json.user.username
+            })
+            window.location = '/home'
+        })
+      }
+
     render() {
         return(
             <div>
                 <h1><u>Login</u></h1>
-                <form onSubmit={e => this.props.handle_login(e, this.state)}>
+                <form onSubmit={e => handle_login(e, this.state)}>
                     <label>Username</label> 
                     <input type="text" name="username" value={this.state.username} onChange={this.handle_change} />
 
@@ -37,7 +61,3 @@ class Login extends Component {
 }
 
 export default Login
-
-Login.propTypes = {
-    handle_login: PropTypes.func.isRequired
-};
