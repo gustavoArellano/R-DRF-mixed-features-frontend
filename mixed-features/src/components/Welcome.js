@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-// import Signup from './Signup';
-// import Login from './Login';
 import '../static/Welcome.css';
 
 
@@ -10,9 +8,16 @@ class Welcome extends Component {
         this.state = {
           displayed: '',
           logged_in: localStorage.getItem('token') ? true : false,
-        //   username: ''
         };
-      };
+    };
+
+    componentDidMount() {
+        if(this.state.logged_in) {
+            window.location = '/home'
+        }   
+    }
+
+
 
 
 

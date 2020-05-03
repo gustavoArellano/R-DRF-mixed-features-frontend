@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import '../static/Signup.css'
 
 
@@ -12,8 +11,33 @@ class Signup extends Component {
             username: '',
             email: '',
             zip_code: '',
-            password: ''
+            password: '',
+            logged_in: localStorage.getItem('token') ? true : false,
         }
+
+        this.getCookie = this.getCookie.bind(this)
+
+    }
+
+    getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if ( cookie.substring(0, name.length +1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length +1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    componentDidMount() {
+        if(this.state.logged_in) {
+             window.location = '/home'
+        }   
     }
 
     handle_change = e => {
@@ -26,12 +50,33 @@ class Signup extends Component {
         })
     }
 
+    handle_signup = (e, data) => {
+        e.preventDefault();
+        var csrftoken = this.getCookie('csrftoken')
+        fetch('http://localhost:8000/api/user-signup/', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(json => {
+            localStorage.setItem('token', json.token);
+            this.setState({
+                logged_in: true,
+            })
+            window.location = '/home'
+        })
+      }
+
     render() {
         return(
             <div>
                 <h1><u>Signup</u></h1>
 
-                <form onSubmit={e => this.props.handle_signup(e, this.state)}>
+                <form onSubmit={e => this.handle_signup(e, this.state)}>
 
                     <label>First Name</label>
                     <input type="text" name="first_name" value={this.state.first_name} onChange={this.handle_change} />
@@ -61,7 +106,3 @@ class Signup extends Component {
 }
 
 export default Signup
-
-Signup.propTypes = {
-    handle_signup: PropTypes.func.isRequired
-}

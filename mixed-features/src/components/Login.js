@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types'
 import '../static/Login.css'
 
 class Login extends Component {
@@ -7,8 +6,15 @@ class Login extends Component {
         super(props)
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            logged_in: localStorage.getItem('token') ? true : false,
         };
+    }
+
+    componentDidMount() {
+        if(this.state.logged_in) {
+             window.location = '/home'
+        }   
     }
 
     handle_change = e => {
@@ -35,18 +41,17 @@ class Login extends Component {
             localStorage.setItem('token', json.token);
             this.setState({
                 logged_in: true,
-                displayed: '',
-                username: json.user.username
             })
-            window.location = '/home'
-        })
+                window.location = '/home'
+            })
+            .catch(err => console.log(err, "Something is wrong in Login!"))
       }
 
     render() {
         return(
             <div>
                 <h1><u>Login</u></h1>
-                <form onSubmit={e => handle_login(e, this.state)}>
+                <form onSubmit={e => this.handle_login(e, this.state)}>
                     <label>Username</label> 
                     <input type="text" name="username" value={this.state.username} onChange={this.handle_change} />
 

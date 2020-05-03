@@ -12,7 +12,7 @@ class NavBar extends Component {
     handle_logout = () => {
         localStorage.removeItem('token');
         this.setState({ logged_in: false, display: ''})
-        window.lo = '/'
+        window.location = '/'
       }
 
 
@@ -36,7 +36,9 @@ class NavBar extends Component {
 
         const logged_in_nav = (
             <ul>
-                <li onClick={ this.handle_logout }>Logout</li>
+                <li>
+                    <Link className="link" onClick={ this.handle_logout } to="/">Logout</Link>
+                </li>
             </ul>
         )
 

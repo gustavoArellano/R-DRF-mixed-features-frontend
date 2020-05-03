@@ -17,49 +17,6 @@ class App extends Component {
     }
   }
 
-  handle_signup = (e, data) => {
-    e.preventDefault();
-    fetch('http://localhost:8000/api/user-signup/', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-        .then(res => res.json())
-        .then(json => {
-        localStorage.setItem('token', json.token);
-        this.setState({
-            logged_in: true,
-            displayed: '',
-            username: json.username
-        })
-        window.location = '/home'
-    })
-  }
-
-  // handle_login = (e, data) => {
-  //   e.preventDefault();
-  //   fetch('http://localhost:8000/token-auth/', {
-  //       method: 'POST',
-  //       headers: {
-  //       'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(data)
-  //   })
-  //       .then(res => res.json())
-  //       .then(json => {
-  //       localStorage.setItem('token', json.token);
-  //       this.setState({
-  //           logged_in: true,
-  //           displayed: '',
-  //           username: json.user.username
-  //       })
-  //       window.location = '/home'
-  //   })
-  // }
-
-
   displayThis = show => {
       this.setState({
           displayed: show
