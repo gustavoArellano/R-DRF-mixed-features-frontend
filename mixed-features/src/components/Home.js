@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-// import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom';
+import '../static/Home.css'
 
-// const User = props => (
-//     <p>{props.user.username}</p>
-// )
+
+const User = props => (
+    <Link  to={"/" + props.user.id} className="user-list" ><p className="user-list">{props.user.username}</p></Link>
+)
 class Home extends Component {
     constructor(props) {
         super(props)
@@ -14,7 +16,7 @@ class Home extends Component {
             userList: []
         }
 
-        // this.usersList = this.usersList.bind(this)
+        this.usersList = this.usersList.bind(this)
     }
 
     componentDidMount() {
@@ -26,46 +28,54 @@ class Home extends Component {
                 }
             })
 
-                .then(res => res.json())
-                .then(json => {
-                    this.setState({ 
-                        username: json.username,
-                    })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({ 
+                    username: json.username,
                 })
-                .catch(err => {
-                    console.log(err, "you are not logged in!")
-                })
+            })
+            .catch(err => {
+                console.log(err, "you are not logged in!")
+            })
 
             fetch('http://localhost:8000/api/user-list/', {
-                headers: {
-                    Authorization: `JWT ${localStorage.getItem('token')}`
-                }
+            headers: {
+                Authorization: `JWT ${localStorage.getItem('token')}`
+            }
+        })
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    userList: json, 
+                    isLoading: false})
             })
-                .then(res => res.json())
-                .then(json => 
-                    this.setState({userList: json, isLoading: false})
-                    )
+                
+
         } else {
+
             window.location = '/'
         }
     }
 
-    // usersList() {
-    //     return this.state.userList.map(user => {
-    //         return <User user={user} key={user.id} />
-    //     })
-    // }
+    usersList() {
+        return this.state.userList.map(user => {
+            if ( this.state.username === user.username ) {
+                return null
+            } else {
+                return <User user={user} key={user.id} />
+            }
+        })
+    }
 
     render() {
         const content = this.state.isLoading ? '' : <h1>Welcome, {this.state.username}!</h1>
+        const usersList = this.usersList()
         return(
             <div>
 
                 { content }
 
-                { this.state.userList.map((thisUser) => (
-                    <p>{thisUser}</p>
-                ))}
+                { usersList }
 
             </div>
         )

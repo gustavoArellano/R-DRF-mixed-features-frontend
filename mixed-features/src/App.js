@@ -6,6 +6,8 @@ import Welcome from './components/Welcome';
 import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import UserProfile from './components/UserProfile';
+import MyAccount from './components/MyAccount';
 
 
 class App extends Component {
@@ -56,6 +58,10 @@ class App extends Component {
           <Route path="/signup" component = {Signup} />     
 
           <Route path="/home" component = {Home} />
+
+          <Route path="/:id" component = {UserProfile} />
+
+          <Route path="/account" component = {MyAccount} />
 
           {show}
 

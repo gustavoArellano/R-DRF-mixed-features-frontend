@@ -19,16 +19,17 @@ class NavBar extends Component {
     render() {
         const logged_out_nav = (
             <ul>
+
                 <li>
-                    <Link className="link" to="/login">Login</Link>
+                    <Link to="/login" className="link">Login</Link>
                 </li>
 
                 <li>
-                    <Link className="link" to="/signup">Signup</Link>
+                    <Link to="/signup" className="link">Signup</Link>
                 </li>
 
                 <li>
-                    <Link className="link" to="/">:]</Link>
+                    <Link to="/" className="link">:]</Link>
                 </li>
 
             </ul>
@@ -36,9 +37,19 @@ class NavBar extends Component {
 
         const logged_in_nav = (
             <ul>
+
                 <li>
-                    <Link className="link" onClick={ this.handle_logout } to="/">Logout</Link>
+                    <Link to="/" onClick={ this.handle_logout } className="link">Logout</Link>
                 </li>
+
+                <li>
+                    <Link to="/account" className="link">Account</Link>
+                </li>
+
+                <li>
+                    <Link to="/home" className="link">Home</Link>
+                </li>
+
             </ul>
         )
 
