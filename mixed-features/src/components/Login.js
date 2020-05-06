@@ -14,7 +14,7 @@ class Login extends Component {
     componentDidMount() {
         if(this.state.logged_in) {
              window.location = '/home'
-        }   
+        } 
     }
 
     handle_change = e => {
@@ -36,15 +36,15 @@ class Login extends Component {
             },
             body: JSON.stringify(data)
         })
-            .then(res => res.json())
-            .then(json => {
-            localStorage.setItem('token', json.token);
-            this.setState({
-                logged_in: true,
-            })
-                window.location = '/home'
-            })
-            .catch(err => console.log(err, "Something is wrong in Login!"))
+        .then(res => res.json())
+        .then(json => {
+        localStorage.setItem('token', json.token);
+        this.setState({
+            logged_in: true,
+        })
+            window.location = '/home'
+        })
+        .catch(err => console.log(err, "Something is wrong in Login!"))
       }
 
     render() {

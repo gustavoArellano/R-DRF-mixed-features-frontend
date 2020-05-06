@@ -69,7 +69,7 @@ class Signup extends Component {
             })
             window.location = '/home'
         })
-      }
+    }
 
     render() {
         return(

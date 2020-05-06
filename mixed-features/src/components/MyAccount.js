@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../static/MyAccount.css'
 
 class MyAccount extends Component {
@@ -6,7 +7,7 @@ class MyAccount extends Component {
         super(props)
         this.state = {
             logged_in: localStorage.getItem('token') ? true : false,
-            data: ''
+            user: ''
         }
     }
 
@@ -20,10 +21,11 @@ class MyAccount extends Component {
             })
 
             .then(res => res.json())
-            .then(json => {
+            .then(data => {
                 this.setState({ 
-                    data: json
+                    user: data
                 })
+                console.log(data)
             })
             .catch(err => {
                 console.log("ERROR: " + err, "you are not logged in!")
@@ -35,29 +37,38 @@ class MyAccount extends Component {
 
     render() {
         return(
-            <div>
-                
+            <div className="container">
+
                 <h1>My Account</h1>
+
+                <img src={'http://localhost:8000' + this.state.user.image} alt=""/>
                 
                 <p>
                     <u>First Name:</u><br/>
-                    {this.state.data.first_name}
+                    {this.state.user.first_name}
                 </p>
 
                 <p>
                     <u>Last Name:</u><br/>
-                    {this.state.data.last_name}
+                    {this.state.user.last_name}
                 </p>
 
                 <p>
                     <u>Username:</u><br/>
-                    {this.state.data.username}
+                    {this.state.user.username}
                 </p>
 
                 <p>
                     <u>Email:</u><br/>
-                    {this.state.data.email}
+                    {this.state.user.email}
                 </p>
+
+                <p>
+                    <u>Zip Code:</u><br/>
+                    {this.state.user.zip_code}
+                </p>
+
+                <Link to="/account-edit">Edit Profile</Link>
 
             </div>
         )

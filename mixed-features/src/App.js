@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import UserProfile from './components/UserProfile';
 import MyAccount from './components/MyAccount';
+import EditMyAccount from './components/EditMyAccount';
 
 
 class App extends Component {
@@ -53,15 +54,17 @@ class App extends Component {
 
           <Route path="/" exact component = {Welcome} />
 
-          <Route path="/login" component = {Login} />
+          <Route path="/login" exact component = {Login} />
 
-          <Route path="/signup" component = {Signup} />     
+          <Route path="/signup" exact component = {Signup} />     
 
-          <Route path="/home" component = {Home} />
+          <Route path="/home" exact component = {Home} />
 
-          <Route path="/:id" component = {UserProfile} />
+          <Route path="/user/:id" exact component = {UserProfile} />
 
-          <Route path="/account" component = {MyAccount} />
+          <Route path="/account" exact component = {MyAccount} />
+
+          <Route path="/account-edit" component = {EditMyAccount} />
 
           {show}
 

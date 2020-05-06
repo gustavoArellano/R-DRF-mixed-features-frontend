@@ -4,7 +4,7 @@ import '../static/Home.css'
 
 
 const User = props => (
-    <Link  to={"/" + props.user.id} className="user-list" ><p className="user-list">{props.user.username}</p></Link>
+    <Link  to={"/user/" + props.user.id + "/"} className="user-list"><p className="user-list">{props.user.username}</p></Link>
 )
 class Home extends Component {
     constructor(props) {
@@ -27,22 +27,22 @@ class Home extends Component {
                     Authorization: `JWT ${localStorage.getItem('token')}`
                 }
             })
-
-            .then(res => res.json())
-            .then(json => {
-                this.setState({ 
-                    username: json.username,
+                .then(res => res.json())
+                .then(json => {
+                    this.setState({ 
+                        username: json.username,
+                    })
                 })
-            })
-            .catch(err => {
-                console.log(err, "you are not logged in!")
-            })
+                .catch(err => {
+                    console.log(err, "you are not logged in!")
+                    window.location = '/login'
+                })
 
             fetch('http://localhost:8000/api/user-list/', {
-            headers: {
-                Authorization: `JWT ${localStorage.getItem('token')}`
-            }
-        })
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                }
+            })
             .then(res => res.json())
             .then(json => {
                 this.setState({
@@ -69,7 +69,7 @@ class Home extends Component {
 
     render() {
         const content = this.state.isLoading ? '' : <h1>Welcome, {this.state.username}!</h1>
-        const usersList = this.usersList()
+        const usersList = this.state.isLoading ? '' : this.usersList()
         return(
             <div>
 
