@@ -9,6 +9,8 @@ import Signup from './components/Signup';
 import UserProfile from './components/UserProfile';
 import MyAccount from './components/MyAccount';
 import EditMyAccount from './components/EditMyAccount';
+import Events from './components/Events';
+import CreateEvent from './components/CreateEvent';
 
 
 class App extends Component {
@@ -64,7 +66,11 @@ class App extends Component {
 
           <Route path="/account" exact component = {MyAccount} />
 
-          <Route path="/account-edit" component = {EditMyAccount} />
+          <Route path="/account-edit" exact component = {EditMyAccount} />
+
+          <Route path="/events" exact component = {Events} />
+
+          <Route path="/create-event" exact component = {CreateEvent} />
 
           {show}
 

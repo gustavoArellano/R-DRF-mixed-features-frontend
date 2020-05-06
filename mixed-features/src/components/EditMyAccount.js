@@ -68,7 +68,7 @@ class EditMyAccount extends Component {
     }
 
     handle_image_change = e => {
-            this.setState({image: e.target.files[0]})
+        this.setState({image: e.target.files[0]})
         console.log(this.state.image)
     }
 
@@ -104,11 +104,8 @@ class EditMyAccount extends Component {
                 }
             })
 
-                .then(res => console.log(res))
-                // .then(json => {
-                //     console.log(json)
-                //     // window.location = '/account'
-                // })
+                .then(window.location = '/account')
+  
                 .catch(err => console.log(err, 'Update failed from catch.'))
         } else {
             window.location = '/login'

@@ -7,7 +7,8 @@ class MyAccount extends Component {
         super(props)
         this.state = {
             logged_in: localStorage.getItem('token') ? true : false,
-            user: ''
+            user: '',
+            isLoading: false,
         }
     }
 
@@ -23,7 +24,9 @@ class MyAccount extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({ 
-                    user: data
+                    user: data,
+                    isLoading: false
+
                 })
                 console.log(data)
             })
@@ -36,39 +39,49 @@ class MyAccount extends Component {
     }
 
     render() {
+
+        const userProfile = 
+            this.state.isLoading ? 
+                '' 
+            : 
+                <div>
+                    <img src={'http://localhost:8000' + this.state.user.image} alt=""/>
+                
+                    <p>
+                        <u>First Name:</u><br/>
+                        {this.state.user.first_name}
+                    </p>
+
+                    <p>
+                        <u>Last Name:</u><br/>
+                        {this.state.user.last_name}
+                    </p>
+
+                    <p>
+                        <u>Username:</u><br/>
+                        {this.state.user.username}
+                    </p>
+
+                    <p>
+                        <u>Email:</u><br/>
+                        {this.state.user.email}
+                    </p>
+
+                    <p>
+                        <u>Zip Code:</u><br/>
+                        {this.state.user.zip_code}
+                    </p>
+
+                    <Link to="/account-edit">Edit Profile</Link>
+                </div>
+
+
         return(
             <div className="container">
 
                 <h1>My Account</h1>
 
-                <img src={'http://localhost:8000' + this.state.user.image} alt=""/>
-                
-                <p>
-                    <u>First Name:</u><br/>
-                    {this.state.user.first_name}
-                </p>
-
-                <p>
-                    <u>Last Name:</u><br/>
-                    {this.state.user.last_name}
-                </p>
-
-                <p>
-                    <u>Username:</u><br/>
-                    {this.state.user.username}
-                </p>
-
-                <p>
-                    <u>Email:</u><br/>
-                    {this.state.user.email}
-                </p>
-
-                <p>
-                    <u>Zip Code:</u><br/>
-                    {this.state.user.zip_code}
-                </p>
-
-                <Link to="/account-edit">Edit Profile</Link>
+                {userProfile}
 
             </div>
         )

@@ -47,6 +47,14 @@ class NavBar extends Component {
                 </li>
 
                 <li>
+                    <Link to="/create-event" className="link">Create Event</Link>
+                </li>
+
+                <li>
+                    <Link to="/events" className="link">Events</Link>
+                </li>
+
+                <li>
                     <Link to="/home" className="link">Home</Link>
                 </li>
 
