@@ -1,0 +1,14 @@
+.event-box {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: 250px;
+    border: solid black 1px;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;    
+}
+
+.event-box p {
+    margin: 30px auto;
+}

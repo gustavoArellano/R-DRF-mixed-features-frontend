@@ -63,12 +63,12 @@ class Signup extends Component {
         })
             .then(res => res.json())
             .then(json => {
-            localStorage.setItem('token', json.token);
-            this.setState({
-                logged_in: true,
+                localStorage.setItem('token', json.token);
+                this.setState({
+                    logged_in: true,
+                })
+                window.location = '/home'
             })
-            window.location = '/home'
-        })
     }
 
     render() {

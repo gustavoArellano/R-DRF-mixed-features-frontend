@@ -2,6 +2,20 @@
     text-align: center;
 }
 
-.container p {
+.info img, .info p {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.info, .events {
+    display: block;
+    padding: 15px;
+}
+
+.info p {
+    margin: 15px 40px;
+}
+
+.joined_events p {
     margin: 50px;
 }
