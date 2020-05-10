@@ -6,9 +6,10 @@ import axios from 'axios';
 
 
 class EditMyAccount extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
+            image: null,
             user: '',
             first_name: '',
             last_name: '',
@@ -16,7 +17,7 @@ class EditMyAccount extends Component {
             email: '',
             zip_code: '',
             logged_in: localStorage.getItem('token') ? true : false,
-            image: null,
+            isLoading: false,
         }
 
         this.getCookie = this.getCookie.bind(this);
@@ -51,7 +52,6 @@ class EditMyAccount extends Component {
             .then(data => {
                 this.setState({ 
                     user: data,
-                    image: data.image,
                     first_name: data.first_name,
                     last_name: data.last_name,
                     username: data.username,
@@ -69,9 +69,11 @@ class EditMyAccount extends Component {
     }
 
     handle_image_change = e => {
+        console.log("IMAGE CHANGE = ", e.target.files[0])
         this.setState({
-            image: e.target.files[0]
+            image: e.target.files[0],
         })
+        console.log("AFTER IMAGE CHANGE THIS IS THE NEW IMAGE STATE = ", this.state.image, this.state.first_name)
     }
 
     handle_change = e => {        
@@ -87,27 +89,28 @@ class EditMyAccount extends Component {
 
     is_image_included() {
         let form_data = new FormData();
-        if (this.state.image.name === undefined) {
-            return null;
-        } else {
+        console.log("IMAGE NAME = ", this.state.image)
+        if (this.state.image !== undefined) {
             return form_data.append('image', this.state.image, this.state.image.name);
+        } else {
+            return null
         }
     }
 
-    handle_update = (e, data) => {
+    handle_update = (e) => {
         e.preventDefault();
         if(this.state.logged_in) {
-            console.log(this.state)
+            console.log("THIS STATE = ", this.state)
             var csrftoken = this.getCookie('csrftoken')
             var id = this.state.user.id
-            console.log("IMAGE NAME = ", this.state.image.name)
             let form_data = new FormData();
-            this.is_image_included()
+            form_data.append('image', this.state.image, this.state.image.name);
             form_data.append('first_name', this.state.first_name);
             form_data.append('last_name', this.state.last_name);
             form_data.append('username', this.state.username);
             form_data.append('email', this.state.email);
             form_data.append('zip_code', this.state.zip_code);
+            console.log("THIS IS WHATS IN THE FORM = ", form_data.data,)
             axios.put('http://localhost:8000/api/user-update/' + id + '/', form_data, {
                 headers: {
                     Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -115,8 +118,8 @@ class EditMyAccount extends Component {
                     'X-CSRFToken': csrftoken,
                 }
             })
-
-                .then(window.location = '/account')  
+                .then(console.log())
+                // .then(window.location = '/account')  
                 .catch(err => console.log(err, 'Update failed from catch.'))
         } else {
             window.location = '/login'
@@ -124,7 +127,29 @@ class EditMyAccount extends Component {
     }
 
     render() {
-        console.log("CURRENT IMAGE", this.state.image_name)
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+
         const userProfile = 
             this.state.isLoading ? 
                 ''
@@ -132,7 +157,7 @@ class EditMyAccount extends Component {
             <form onSubmit={this.handle_update}>
                 <label>Profile Image</label>
                 <img src={`http://localhost:8000` + this.state.user.image} alt=""/>
-                <input type="file" name="image" accept="image/*" onChange={this.handle_image_change} />
+                <input type="file" name="image" accept="image/png, image/gif, image/jpeg" onChange={this.handle_image_change} />
 
                 <label>First Name</label>
                 <input type="text" name="first_name" value={this.state.first_name} onChange={this.handle_change} />

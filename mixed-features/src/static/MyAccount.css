@@ -7,6 +7,10 @@
     vertical-align: top;
 }
 
+.info img {
+    width: 250px;
+}
+
 .info, .events {
     display: block;
     padding: 15px;

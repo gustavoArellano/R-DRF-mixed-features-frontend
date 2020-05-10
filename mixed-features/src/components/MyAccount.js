@@ -137,7 +137,7 @@ class MyAccount extends Component {
                         <br />
                         <Link to="/account-edit">Edit Profile</Link>
                         <br />
-                        <Link to="/account-edit">Delete My Account</Link>
+                        <Link to="/account-delete">Delete My Account</Link>
 
                     </div>
 
