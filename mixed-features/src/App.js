@@ -11,6 +11,8 @@ import MyAccount from './components/MyAccount';
 import EditMyAccount from './components/EditMyAccount';
 import Events from './components/Events';
 import CreateEvent from './components/CreateEvent';
+import EventDetails from './components/EventDetails';
+
 
 
 class App extends Component {
@@ -71,6 +73,8 @@ class App extends Component {
           <Route path="/events" exact component = {Events} />
 
           <Route path="/create-event" exact component = {CreateEvent} />
+
+          <Route path="/event-details/:id" exact component = {EventDetails} />
 
           {show}
 

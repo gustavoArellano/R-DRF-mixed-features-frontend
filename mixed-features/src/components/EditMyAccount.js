@@ -16,10 +16,11 @@ class EditMyAccount extends Component {
             email: '',
             zip_code: '',
             logged_in: localStorage.getItem('token') ? true : false,
-            image: null
+            image: null,
         }
 
         this.getCookie = this.getCookie.bind(this);
+        this.is_image_included = this.is_image_included.bind(this)
     }
 
     getCookie(name) {
@@ -68,11 +69,12 @@ class EditMyAccount extends Component {
     }
 
     handle_image_change = e => {
-        this.setState({image: e.target.files[0]})
-        console.log(this.state.image)
+        this.setState({
+            image: e.target.files[0]
+        })
     }
 
-    handle_change = e => {
+    handle_change = e => {        
         const name = e.target.name;
         const value = e.target.value;
         this.setState(prevstate => {
@@ -83,14 +85,24 @@ class EditMyAccount extends Component {
         })
     }
 
+    is_image_included() {
+        let form_data = new FormData();
+        if (this.state.image.name === undefined) {
+            return null;
+        } else {
+            return form_data.append('image', this.state.image, this.state.image.name);
+        }
+    }
+
     handle_update = (e, data) => {
         e.preventDefault();
         if(this.state.logged_in) {
             console.log(this.state)
             var csrftoken = this.getCookie('csrftoken')
             var id = this.state.user.id
+            console.log("IMAGE NAME = ", this.state.image.name)
             let form_data = new FormData();
-            form_data.append('image', this.state.image, this.state.image.name);
+            this.is_image_included()
             form_data.append('first_name', this.state.first_name);
             form_data.append('last_name', this.state.last_name);
             form_data.append('username', this.state.username);
@@ -104,8 +116,7 @@ class EditMyAccount extends Component {
                 }
             })
 
-                .then(window.location = '/account')
-  
+                .then(window.location = '/account')  
                 .catch(err => console.log(err, 'Update failed from catch.'))
         } else {
             window.location = '/login'
@@ -113,34 +124,40 @@ class EditMyAccount extends Component {
     }
 
     render() {
+        console.log("CURRENT IMAGE", this.state.image_name)
+        const userProfile = 
+            this.state.isLoading ? 
+                ''
+            : 
+            <form onSubmit={this.handle_update}>
+                <label>Profile Image</label>
+                <img src={`http://localhost:8000` + this.state.user.image} alt=""/>
+                <input type="file" name="image" accept="image/*" onChange={this.handle_image_change} />
+
+                <label>First Name</label>
+                <input type="text" name="first_name" value={this.state.first_name} onChange={this.handle_change} />
+
+                <label>Last Name</label>
+                <input type="text" name="last_name" value={this.state.last_name} onChange={this.handle_change} />
+
+                <label>Username</label>
+                <input type="text" name="username" value={this.state.username} onChange={this.handle_change} />
+
+                <label>Email</label>
+                <input type="text" name="email" value={this.state.email} onChange={this.handle_change} />
+
+                <label>Zip Code</label>
+                <input type="text" name="zip_code" value={this.state.zip_code} onChange={this.handle_change} />
+
+                <input className="button" type="submit" />
+
+            </form>
         return(
             <div>
 
                 <h1>Update Account</h1>
 
-                <form onSubmit={this.handle_update}>
-                    <label>Profile Image</label>
-                    <img src={`http://localhost:8000` + this.state.user.image} alt=""/>
-                    <input type="file" name="image" accept="image/png, image/jpeg" onChange={this.handle_image_change} />
-
-                    <label>First Name</label>
-                    <input type="text" name="first_name" value={this.state.first_name} onChange={this.handle_change} />
-
-                    <label>Last Name</label>
-                    <input type="text" name="last_name" value={this.state.last_name} onChange={this.handle_change} />
-
-                    <label>Username</label>
-                    <input type="text" name="username" value={this.state.username} onChange={this.handle_change} />
-
-                    <label>Email</label>
-                    <input type="text" name="email" value={this.state.email} onChange={this.handle_change} />
-
-                    <label>Zip Code</label>
-                    <input type="text" name="zip_code" value={this.state.zip_code} onChange={this.handle_change} />
-
-                    <input className="button" type="submit" />
-
-                </form>
+                {userProfile}
                 
 
             </div>

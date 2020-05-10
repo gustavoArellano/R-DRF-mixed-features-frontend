@@ -2,19 +2,11 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom';
 import '../static/Events.css'
 
-const Event = props => (
-    <div className="event-box">
-        <p>Title: {props.event.title}</p>
-        <p>Description: {props.event.description}</p>
-        <p>Zip Code: {props.event.zip_code}</p>
-        <p>Event By: {props.user}</p>
-    </div>
-)
 class Events extends Component {
     constructor() {
         super()
         this.state = {
-            // user: '',
+            user: '',
             logged_in: localStorage.getItem('token') ? true : false,
             isLoading: false,
             eventList: [],
@@ -25,37 +17,38 @@ class Events extends Component {
 
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.setState({isLoading: true})
         if(this.state.logged_in) {
-            // fetch('http://localhost:8000/api/current-user/', {
-            //     headers: {
-            //         Authorization: `JWT ${localStorage.getItem('token')}`
-            //     }
-            // })
-            //     .then(res => res.json())
-            //     .then(json => {
-            //         this.setState({ 
-            //             user: json,
-            //         })
-            //     })
-            //     .catch(err => {
-            //         console.log(err, "you are not logged in!")
-            //     })
-
-            fetch('http://localhost:8000/api/event-list/', {
+            await fetch('http://localhost:8000/api/current-user/', {
                 headers: {
                     Authorization: `JWT ${localStorage.getItem('token')}`
                 }
             })
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    eventList: json
+                .then(res => res.json())
+                .then(json => {
+                    this.setState({ 
+                        user: json,
+                    })
                 })
-            })
+                .catch(err => {
+                    console.log(err, "you are not logged in!")
+                })
 
-            fetch('http://localhost:8000/api/user-list/', {
+            var id = this.state.user.id
+            await fetch('http://localhost:8000/api/not-attending-event/' + id + '/', {
+                headers: {
+                    Authorization: `JWT ${localStorage.getItem('token')}`
+                },
+            })
+                .then(res => res.json())
+                .then(json => {
+                    this.setState({
+                        eventList: json, 
+                    })
+                })
+
+            await fetch('http://localhost:8000/api/user-list/', {
                 headers: {
                     Authorization: `JWT ${localStorage.getItem('token')}`
                 }
@@ -74,6 +67,16 @@ class Events extends Component {
     }
 
     eventsList() {
+        const Event = props => (
+            <div className="event-box">
+                <p>Title: {props.event.title}</p>
+                <p>Description: {props.event.description}</p>
+                <p>Zip Code: {props.event.zip_code}</p>
+                <p>Event By: {props.user}</p>
+                <button>Join</button>
+            </div>
+        )
+
         return this.state.eventList.map(event => {
             // eslint-disable-next-line
             let hosted_by = this.state.userList.map(user => {if (event.event_by_user === user.id){return user.first_name}})
