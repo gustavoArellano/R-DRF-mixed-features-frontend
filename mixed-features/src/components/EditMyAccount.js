@@ -21,7 +21,6 @@ class EditMyAccount extends Component {
         }
 
         this.getCookie = this.getCookie.bind(this);
-        this.is_image_included = this.is_image_included.bind(this)
     }
 
     getCookie(name) {
@@ -87,14 +86,8 @@ class EditMyAccount extends Component {
         })
     }
 
-    is_image_included() {
-        let form_data = new FormData();
-        console.log("IMAGE NAME = ", this.state.image)
-        if (this.state.image !== undefined) {
-            return form_data.append('image', this.state.image, this.state.image.name);
-        } else {
-            return null
-        }
+    async to_account() {
+        await this.componentDidMount;
     }
 
     handle_update = (e) => {
@@ -118,12 +111,13 @@ class EditMyAccount extends Component {
                     'X-CSRFToken': csrftoken,
                 }
             })
-                .then(console.log())
-                // .then(window.location = '/account')  
+                .then(res => console.log(res.data, "User Updated!"))
                 .catch(err => console.log(err, 'Update failed from catch.'))
+                
         } else {
             window.location = '/login'
         }
+
     }
 
     render() {
@@ -141,15 +135,22 @@ class EditMyAccount extends Component {
         // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
         // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
         // IMAGE UPLOAD WORKS, DOES NOT WORK UPDATING IT TOGETHER WITH THE REST OF THE DATA, SEPARATE IT!!!!!!!
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
-        // *****************************************************************
 
+
+        // ALSO, AS SOON AS UPDATE IS SUBMITTED AND WINDOW RELOCATION BACK TO ACCOUNT FAILS TO UPLOAD THE IMAGE!!!
+        // ALSO, AS SOON AS UPDATE IS SUBMITTED AND WINDOW RELOCATION BACK TO ACCOUNT FAILS TO UPLOAD THE IMAGE!!!
+        // ALSO, AS SOON AS UPDATE IS SUBMITTED AND WINDOW RELOCATION BACK TO ACCOUNT FAILS TO UPLOAD THE IMAGE!!!
+        // ALSO, AS SOON AS UPDATE IS SUBMITTED AND WINDOW RELOCATION BACK TO ACCOUNT FAILS TO UPLOAD THE IMAGE!!!
+        // ALSO, AS SOON AS UPDATE IS SUBMITTED AND WINDOW RELOCATION BACK TO ACCOUNT FAILS TO UPLOAD THE IMAGE!!!       
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        // *****************************************************************
+        console.log("CURRENT STATE = ", this.state)
         const userProfile = 
             this.state.isLoading ? 
                 ''

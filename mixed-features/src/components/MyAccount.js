@@ -135,9 +135,11 @@ class MyAccount extends Component {
                             {this.state.user.zip_code}
                         </p>
                         <br />
+                        <Link to={"/user/" + this.state.user.id + "/"}>Profile View</Link>
+                        <br />
                         <Link to="/account-edit">Edit Profile</Link>
                         <br />
-                        <Link to="/account-delete">Delete My Account</Link>
+                        <Link to="#">Delete My Account</Link>
 
                     </div>
 
