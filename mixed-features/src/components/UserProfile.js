@@ -41,20 +41,43 @@ class UserProfile extends Component {
 
     render() {
         const content = this.state.isLoading ? '' : 
-        <div>
+        <div className="info">
             
             <h1>{this.state.user.first_name}'s Profile</h1>
 
-            <img src={'http://localhost:8000' + this.state.user.image} alt=""/>
-            <p>Last Name: {this.state.user.last_name}</p>
-            <p>Username: {this.state.user.username}</p>
-            <p>Email: {this.state.user.email}</p>
+            <img src={ 'http://localhost:8000' + this.state.user.image } alt=""/>
+            <h6>[Badge[Bronze | Silver | Gold | Platinum]]</h6>
+            <div className="user-details">
+                <p>Username: { this.state.user.username }</p>
+                <p>About me: asdkfjdkslajfklsdjfklsdajfksdlfjsd.</p>
+                <p>Email: { this.state.user.email }</p>
+                <p>Ridden Events: [0]</p>
+                <p>Followers: [0]</p>
+                <p>Following: [0]</p>
+                <p>Riding Skill: [Beginner]</p>
+                <p>[Follow / Following]</p>
+                <p>[Direct Message]</p>
+            </div>
 
         </div>
         return(
             <div>
 
                 {content}
+
+                <h6>Ridden Event Posts | My Posts </h6>
+
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
+                <div className="placeholder"></div>
 
             </div>
         )

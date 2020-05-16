@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class UserFriendList extends Component {
+class Store extends Component {
     constructor() {
         super()
         this.state = {}
@@ -9,7 +9,7 @@ class UserFriendList extends Component {
     render() {
         return(
             <div>
-                <h1>[USERS] Followers</h1>
+                <h1>Merchandise coming soon!</h1>
             </div>
         )
     }

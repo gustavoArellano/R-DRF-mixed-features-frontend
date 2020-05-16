@@ -1,0 +1,33 @@
+.container {
+    text-align: center;
+}
+
+.info img, .user-details {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.info img {
+    width: 250px;
+}
+
+.user-details {
+    width: 950px;
+}
+
+.info, .events {
+    display: block;
+    padding: 15px;
+}
+
+.info p {
+    margin: 15px 40px;
+}
+
+.placeholder {
+    display: inline-block;
+    margin: 20px;
+    width: 250px;
+    height: 250px;
+    background-color: red;
+}

@@ -52,6 +52,8 @@ class CreateEvent extends Component {
                 .catch(err => {
                     console.log(err, "you are not logged in!")
                 })
+        } else {
+            window.location = '/'
         }
     }
 
