@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import '../static/UserProfile.css'
+import '../static/UserProfile.css';
+// import RiddenEventPosts from './RiddenEventPosts';
+import MyPosts from './MyPosts';
+import HostingEvents from './HostingEvents';
 
 class UserProfile extends Component {
     constructor(props) {
@@ -39,8 +42,32 @@ class UserProfile extends Component {
         }
     }
 
+    // handle_showing_content = e => {
+    //     console.log(e.target.value)
+    //     const show = e.target.value
+    //     this.setState({
+    //         displaying: show
+    //     })
+    // }
+
+    Example = (title) => {
+        const component = title
+        this.setState({
+            displaying: component
+        })
+    }
+
     render() {
+
+        // function Example(value) {
+        //     const component = value
+        //     this.setState({
+        //         displaying: component
+        //     })
+        // }
+
         const content = this.state.isLoading ? '' : 
+        
         <div className="info">
             
             <h1>{this.state.user.first_name}'s Profile</h1>
@@ -60,24 +87,51 @@ class UserProfile extends Component {
             </div>
 
         </div>
+
+        let show;
+            switch (this.state.displaying) {
+                case 'HostingEvents':
+                    show = 
+                        <div>
+                            <HostingEvents />
+                        </div>
+                    break;
+
+                case 'MyPosts':
+                    show = <MyPosts />
+                    break;
+                
+                default:
+                    show =
+                        <div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                            <div className="placeholder"></div>
+                        </div>
+            }
+
         return(
             <div>
 
                 {content}
 
-                <h6>Ridden Event Posts | My Posts </h6>
+                <div className="options">
+                    <h6 onClick={ () => this.Example('RiddenEventPosts') } className="option">Ridden Event Posts</h6>
+                    <h6>|</h6>
+                    <h6 onClick={ () => this.Example('MyPosts') } className="option">My Posts</h6>
+                    <h6>|</h6>
+                    <h6 onClick={ () => this.Example('HostingEvents') } className="option">Hosting Events</h6>
+                </div>
 
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
-                <div className="placeholder"></div>
+                {show}
 
             </div>
         )

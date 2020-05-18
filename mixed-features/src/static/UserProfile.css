@@ -31,3 +31,29 @@
     height: 250px;
     background-color: red;
 }
+
+.placeholder2 {
+    display: inline-block;
+    margin: 20px;
+    width: 250px;
+    height: 250px;
+    background-color: blue;
+}
+
+.placeholder3 {
+    display: inline-block;
+    margin: 20px;
+    width: 250px;
+    height: 250px;
+    background-color: green;
+}
+
+.options h6 {
+    display: inline-block;
+    margin: 5px;
+}
+
+.option:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
