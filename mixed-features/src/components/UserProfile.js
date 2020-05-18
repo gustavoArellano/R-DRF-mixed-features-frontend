@@ -31,7 +31,7 @@ class UserProfile extends Component {
             .then(data => {
                 this.setState({
                     user: data,
-                    isLoading: false,
+                    isLoading: false
                 })
             })
             .catch(err => {
@@ -42,29 +42,14 @@ class UserProfile extends Component {
         }
     }
 
-    // handle_showing_content = e => {
-    //     console.log(e.target.value)
-    //     const show = e.target.value
-    //     this.setState({
-    //         displaying: show
-    //     })
-    // }
-
-    Example = (title) => {
-        const component = title
+    display = (section) => {
+        const component = section
         this.setState({
-            displaying: component
+            displaying: component,
         })
     }
 
     render() {
-
-        // function Example(value) {
-        //     const component = value
-        //     this.setState({
-        //         displaying: component
-        //     })
-        // }
 
         const content = this.state.isLoading ? '' : 
         
@@ -124,11 +109,11 @@ class UserProfile extends Component {
                 {content}
 
                 <div className="options">
-                    <h6 onClick={ () => this.Example('RiddenEventPosts') } className="option">Ridden Event Posts</h6>
+                    <h6 onClick={ () => this.display('RiddenEventPosts') } className="option">Ridden Event Posts</h6>
                     <h6>|</h6>
-                    <h6 onClick={ () => this.Example('MyPosts') } className="option">My Posts</h6>
+                    <h6 onClick={ () => this.display('MyPosts') } className="option">My Posts</h6>
                     <h6>|</h6>
-                    <h6 onClick={ () => this.Example('HostingEvents') } className="option">Hosting Events</h6>
+                    <h6 onClick={ () => this.display('HostingEvents') } className="option">Hosting Events</h6>
                 </div>
 
                 {show}

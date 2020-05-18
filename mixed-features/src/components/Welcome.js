@@ -11,11 +11,11 @@ class Welcome extends Component {
         };
     };
 
-    componentDidMount() {
-        if(this.state.logged_in) {
-            window.location = '/home'
-        }   
-    }
+    // componentDidMount() {
+    //     if(this.state.logged_in) {
+    //         window.location = '/home'
+    //     }   
+    // }
 
 
 

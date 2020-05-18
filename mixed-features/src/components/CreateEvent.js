@@ -103,7 +103,7 @@ class CreateEvent extends Component {
                 .then(res => res.json())
                 .catch(err => console.log("Error from catch: ", err))
         } else {
-            window.location = '/login'
+            window.location = '/login';
         }
     }
 
