@@ -104,7 +104,7 @@ class Events extends Component {
 
     async handle_submit(e, event_id) {
         e.preventDefault();
-        this.setState({button_disabled: true})
+        this.setState({isLoading: true})
         const event = event_id
         const user = this.state.user.id
         console.log("SUBMIT DATA = ", user, event)
@@ -129,7 +129,7 @@ class Events extends Component {
     eventsList() {
         const Event = props => (
             <div className="event-box">
-                <Link><p>Title: {props.event.title}</p></Link>
+                <Link to={"/event-details/" + props.event.id}><p>Title: {props.event.title}</p></Link>
                 <p>Description: {props.event.description}</p>
                 <p>Zip Code: {props.event.zip_code}</p>
                 <p>Event By: {props.user}</p>

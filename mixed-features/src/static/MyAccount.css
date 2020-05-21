@@ -23,3 +23,8 @@
 .joined_events p {
     margin: 50px;
 }
+
+.joined_events .event-box {
+    height: 310px;
+    margin: 10px auto;
+}

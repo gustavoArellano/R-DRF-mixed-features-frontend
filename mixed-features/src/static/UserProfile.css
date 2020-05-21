@@ -24,14 +24,6 @@
     margin: 15px 40px;
 }
 
-.placeholder {
-    display: inline-block;
-    margin: 20px;
-    width: 250px;
-    height: 250px;
-    background-color: red;
-}
-
 .placeholder2 {
     display: inline-block;
     margin: 20px;
@@ -40,12 +32,12 @@
     background-color: blue;
 }
 
-.placeholder3 {
+.placeholder {
     display: inline-block;
     margin: 20px;
     width: 250px;
     height: 250px;
-    background-color: green;
+    background-color: Red;
 }
 
 .options h6 {
@@ -56,4 +48,20 @@
 .option:hover {
     cursor: pointer;
     text-decoration: underline;
+}
+
+.event-box {
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    height: 250px;
+    border: solid black 1px;
+    border-radius: 5px;
+    margin: 20px;
+    padding: 10px;    
+}
+
+.event-box p {
+    margin: 30px auto;
+    display: block;
 }

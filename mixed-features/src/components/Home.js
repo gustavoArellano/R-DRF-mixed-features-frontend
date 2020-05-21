@@ -4,7 +4,7 @@ import '../static/Home.css'
 
 
 const User = props => (
-    <Link  to={"/user/" + props.user.id + "/"} className="user-list"><img className="link-image" src={'http://localhost:8000' + props.user.image} alt=""/><p className="link-name">{props.user.username}</p></Link>
+    <Link  to={"/user/" + props.user.id} className="user-list"><img className="link-image" src={'http://localhost:8000' + props.user.image} alt=""/><p className="link-name">{props.user.username}</p></Link>
 )
 class Home extends Component {
     constructor(props) {
