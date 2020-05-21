@@ -97,10 +97,10 @@ class UserProfile extends Component {
     section() {
         switch (this.state.displaying) {
             case 'MyPosts':
-                return <MyPosts />
+            return <h1>{this.state.username} does not have any posts!</h1>
             
             default:
-                return this.hostedEvents()
+        return this.state.userHostedEvents.length === 0 ? <h1>{this.state.user.username} is not hosting any events at the moment!</h1> : this.hostedEvents() 
         }
     }
 
@@ -115,14 +115,14 @@ class UserProfile extends Component {
                 <br />Attending: {props.event.users_going.length}
             </div>
         )
-        // eslint-disable-next-line
+        
         return this.state.userHostedEvents.map(event => {
             return <Event event={event} key={event.id} />
         })
     }
 
     render() {
-        const content = this.state.isLoading ? '' : 
+        const content = this.state.isLoading ? '' :
             <div className="info">
                 
                 <h1>{this.state.user.first_name}'s Profile</h1>
@@ -136,7 +136,6 @@ class UserProfile extends Component {
                     <p>Email: { this.state.user.email }</p>
                     <p>Ridden Events: [0]</p>
                     <p>Followers: [0]</p>
-                    <p>Following: [0]</p>
                     <p>Riding Skill: [Beginner]</p>
                     <p>[Follow / Following]</p>
                     <p>[Direct Message]</p>
@@ -146,8 +145,6 @@ class UserProfile extends Component {
                     <h6 onClick={() => this.display('HostingEvents')} className="option">Hosting Events</h6>
                     <h6>|</h6>
                     <h6 onClick={() => this.display('MyPosts')} className="option">My Posts</h6>
-                    {/* <h6>|</h6>
-                    <h6 onClick={''} className="option">Ridden Event Posts</h6> */}
                 </div> 
 
                 {this.section()}

@@ -43,7 +43,7 @@ class EventDetails extends Component {
     }
 
     render() {
-        const content = this.state.isLoading ? '' :
+        const content = this.state.isLoading ? '' : 
             <div>
                 
                 <h1>Event Details</h1>

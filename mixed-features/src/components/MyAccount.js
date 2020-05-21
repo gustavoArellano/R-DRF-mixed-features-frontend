@@ -13,7 +13,7 @@ class MyAccount extends Component {
             eventList: [],
             isLoading: false,
         }
-        
+
         this.eventsList = this.eventsList.bind(this)
         this.getCookie = this.getCookie.bind(this);
 
@@ -202,6 +202,16 @@ class MyAccount extends Component {
                         <p>
                             <u>Zip Code:</u><br/>
                             {this.state.user.zip_code}
+                        </p>
+
+                        <p>
+                            <u>Followers:</u><br/>
+                            0
+                        </p>
+
+                        <p>
+                            <u>Following:</u><br/>
+                            0
                         </p>
                         <br />
                         <Link to={"/user/" + this.state.user.id + "/"}>Profile View</Link>
