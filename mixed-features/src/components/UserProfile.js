@@ -97,7 +97,7 @@ class UserProfile extends Component {
     section() {
         switch (this.state.displaying) {
             case 'MyPosts':
-            return <h1>{this.state.username} does not have any posts!</h1>
+            return <h1>{this.state.user.username} does not have any posts!</h1>
             
             default:
         return this.state.userHostedEvents.length === 0 ? <h1>{this.state.user.username} is not hosting any events at the moment!</h1> : this.hostedEvents() 
@@ -108,11 +108,11 @@ class UserProfile extends Component {
         const Event = props => (
             <div className="event-box">
                 <Link to={"/event-details/" + props.event.id}><p>Title: {props.event.title}</p></Link>
-                <br />
+                <br/>
                 <p>Description: {props.event.description}</p>
-                <br />
+                <br/>
                 <p>Zip Code: {props.event.zip_code}</p>
-                <br />Attending: {props.event.users_going.length}
+                <br/>Attending: {props.event.users_going.length}
             </div>
         )
         

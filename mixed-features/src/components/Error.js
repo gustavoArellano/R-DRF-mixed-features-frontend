@@ -11,6 +11,7 @@ class Error extends Component {
             <div>
                 <h1>Error</h1>
                 <p>You must be logged in to view this page!!!</p>
+                <button>Login</button>
             </div>
         )
     }
